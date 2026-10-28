@@ -1,5 +1,6 @@
 // Writes the routine into the phone's own calendar, or exports it as an .ics file.
 // iOS asks for write-only access: the app can add events but never reads the patient's calendar.
+import { isRunningInExpoGo } from 'expo';
 import * as Calendar from 'expo-calendar';
 import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
@@ -15,7 +16,8 @@ const DAY_OF_WEEK = [
   Calendar.DayOfTheWeek.Thursday, Calendar.DayOfTheWeek.Friday, Calendar.DayOfTheWeek.Saturday,
 ];
 
-export const nativeCalendarAvailable = Platform.OS === 'ios' || Platform.OS === 'android';
+// Expo Go doesn't include the calendar API this uses, so there only the .ics file is offered.
+export const nativeCalendarAvailable = (Platform.OS === 'ios' || Platform.OS === 'android') && !isRunningInExpoGo();
 
 async function writableCalendar(): Promise<Calendar.ExpoCalendar | null> {
   if (Platform.OS === 'ios') return Calendar.getDefaultCalendarSync();

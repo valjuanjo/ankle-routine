@@ -223,7 +223,7 @@ Legend: `[x]` done · `[ ]` + "→ ready" means the materials are done and the r
 - [ ] Nov 25: Lima pilot completes 3 weeks; Nov 30: Madison pilot completes
 - [ ] Dec 1–5: Decision gates
 - [x] December: Build the MVP (Step 3), scoped to add-to-calendar (built early, Oct 28; see Step 3)
-- [ ] Test add-to-calendar on one Android phone and one iPhone; ask the Peru data-protection lawyer about exercise names syncing to Google/iCloud calendars
+- [ ] Test the app (incl. add-to-calendar) on one Android phone and one iPhone → steps and checklist: `docs/phone-test.md`
 - [ ] By Dec 31: Law Clinic opinion; Peru data-protection review; content v1.0 reviewed
 
 ### Phase 3: Jan – Mar 2027

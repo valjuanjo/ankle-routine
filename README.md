@@ -76,7 +76,7 @@ npx tsx scripts/make-routine-qr.mts ../demo/demo-routine.json ../demo/demo-routi
 - **Data:** SQLite on the phone only. No server, no analytics SDKs. "Delete all my data" in Settings.
 
 **Verified here:** unit tests (QR codec, schedule math, PDF content, content sync, wording), TypeScript, Android JS bundle, and a full click-through of the web build (onboarding → paste code → log → progress → share → language switch → reload persistence).
-**Not yet verified:** a run on a physical phone (camera scanning, notifications, the PDF share sheet and writing to the phone calendar are native-only). Build a development build with EAS and test on one Android and one iPhone before Nov 19.
+**Not yet verified:** a run on a physical phone (camera scanning, notifications, the PDF share sheet and writing to the phone calendar are native-only). See `docs/phone-test.md` for how to run it on a phone (Expo Go for a quick check; an EAS build for everything including the calendar).
 
 ## Open items that need a person
 
