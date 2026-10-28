@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankle Routine Prototype</title>
+<style>
+  :root { --ink: #1d2433; --muted: #5b6577; --brand: #0f4c5c; --brand-soft: #e6f0f2; --danger: #b42318; --danger-soft: #fff5f4; --line: #d5dbe1; --bg: #f2f4f6; --card: #fff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); font: 16px/1.4 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--ink); display: flex; justify-content: center; padding: 16px; }
+  .phone { width: 100%; max-width: 390px; min-height: 760px; background: var(--card); border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,.12); overflow: hidden; display: flex; flex-direction: column; }
+  header { padding: 18px 20px 10px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
+  header h1 { font-size: 18px; margin: 0; flex: 1; }
+  header button.back { background: none; border: none; font-size: 22px; color: var(--brand); padding: 0 6px 0 0; cursor: pointer; }
+  main { flex: 1; padding: 16px 20px 24px; overflow-y: auto; }
+  nav.tabs { display: flex; border-top: 1px solid var(--line); }
+  nav.tabs button { flex: 1; padding: 12px 4px; border: none; background: none; font-size: 13px; color: var(--muted); cursor: pointer; }
+  nav.tabs button.on { color: var(--brand); font-weight: 700; }
+  .btn { display: block; width: 100%; padding: 14px; border-radius: 12px; border: none; background: var(--brand); color: #fff; font-size: 16px; font-weight: 600; margin-top: 12px; cursor: pointer; }
+  .btn.secondary { background: var(--brand-soft); color: var(--brand); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .choice { display: block; width: 100%; text-align: left; padding: 14px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; margin-top: 10px; font-size: 16px; cursor: pointer; }
+  .choice.on { border-color: var(--brand); background: var(--brand-soft); }
+  .choice small { display: block; color: var(--muted); margin-top: 4px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .safety { border: 2px solid var(--danger); background: var(--danger-soft); border-radius: 14px; padding: 12px 14px; margin: 12px 0; }
+  .safety h2 { color: var(--danger); font-size: 16px; margin: 0 0 6px; }
+  .safety ul { margin: 0 0 8px 18px; padding: 0; font-size: 14px; }
+  .safety a { color: var(--danger); font-weight: 700; }
+  .notice { font-size: 13px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; margin: 12px 0; }
+  label.check { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; font-size: 15px; }
+  label.check input { width: 22px; height: 22px; flex: none; margin-top: 1px; }
+  .ex { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-top: 10px; display: flex; gap: 12px; align-items: center; }
+  .ex .t { flex: 1; } .ex .d { color: var(--muted); font-size: 14px; }
+  .ex input { width: 24px; height: 24px; }
+  .pain { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; margin-top: 8px; }
+  .pain button { padding: 8px 0; border: 1px solid var(--line); border-radius: 6px; background: #fff; font-size: 13px; cursor: pointer; }
+  .pain button.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+  textarea { width: 100%; min-height: 70px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; margin-top: 8px; }
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 10px; text-align: center; font-size: 12px; }
+  .cal div { padding: 8px 0; border-radius: 8px; background: var(--bg); }
+  .cal .done { background: var(--brand); color: #fff; font-weight: 700; }
+  .cal .h { background: none; color: var(--muted); }
+  .scan { aspect-ratio: 1; border-radius: 16px; background: #222; display: flex; align-items: center; justify-content: center; color: #fff; margin-top: 12px; position: relative; }
+  .scan::after { content: ""; width: 60%; aspect-ratio: 1; border: 3px solid #fff; border-radius: 14px; position: absolute; }
+  .share-row { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .share-row span { flex: 1; }
+  .lang { position: fixed; top: 10px; right: 10px; font-size: 12px; }
+  .toast { background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; margin-top: 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="phone"><header id="hdr"></header><main id="main"></main><nav class="tabs" id="tabs"></nav></div>
+<script src="content.js"></script>
+<script>
+// Clickable prototype for usability tests (Gate 2). Not the app: no data is saved.
+const C = window.CONTENT;
+const EX = Object.fromEntries(C.exercises.exercises.map((e) => [e.id, e]));
+const S = { lang: 'es', country: 'PE', consent: false, safetyRead: false, mode: null, routine: null, title: '', screen: 'lang', history: [],
+  log: [], pain: null, note: '', shareOmit: {} };
+
+const L = {
+  en: {
+    welcome: 'Welcome', chooseLang: 'Choose your language', country: 'Where are you?', us: 'United States', pe: 'Peru', next: 'Next',
+    consentT: 'Before you start', consent1: 'I understand this app is not a diagnosis or treatment.', consent2: 'I understand no one monitors what I log. My data stays on my phone.',
+    consent3: 'I understand sharing is optional and I choose what to share.', agree: 'I agree',
+    safetyT: 'Safety checklist', safetyConfirm: 'None of these apply to me right now', start: 'How do you want to start?',
+    m1: 'My physio gave me a code', m1s: 'Scan the QR code from your visit', m2: 'General program', m2s: 'Choose an ankle program', m3: 'My team', m3s: 'Join with your team code',
+    scanT: 'Scan routine code', scanHint: 'Point your camera at the QR code your physio shows you.', simulate: 'Simulate scan',
+    teamT: 'Team code', teamHint: 'Your coach gives you this code.', join: 'Join',
+    confirmGen: 'A health professional has seen my ankle and said a general program is fine for me.',
+    today: 'Today', progress: 'Progress', share: 'Share', safety: 'Safety',
+    markDone: 'Mark session done', painQ: 'Pain right now (optional)', noteQ: 'Note (optional)', save: 'Save session', saved: 'Session saved.',
+    sessions: 'sessions done this week', perSide: 'per side', moveOn: 'Move on when',
+    shareT: 'Share my log', shareHint: 'Choose what to include. You send it yourself, by WhatsApp, email or print.', sendPdf: 'Create PDF and share',
+    shareDone: 'Your phone\'s share menu would open here.', incDates: 'Dates and sessions done', incPain: 'Pain scores', incNotes: 'Notes',
+    reminders: 'Reminders on your routine days at', days: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], noSessions: 'No sessions yet.',
+  },
+  es: {
+    welcome: 'Bienvenido', chooseLang: 'Elige tu idioma', country: '¿Dónde estás?', us: 'Estados Unidos', pe: 'Perú', next: 'Siguiente',
+    consentT: 'Antes de empezar', consent1: 'Entiendo que esta app no es un diagnóstico ni un tratamiento.', consent2: 'Entiendo que nadie supervisa lo que registro. Mis datos se quedan en mi celular.',
+    consent3: 'Entiendo que compartir es opcional y yo elijo qué compartir.', agree: 'Acepto',
+    safetyT: 'Señales de alarma', safetyConfirm: 'Ahora no tengo ninguna de estas señales', start: '¿Cómo quieres empezar?',
+    m1: 'Mi fisioterapeuta me dio un código', m1s: 'Escanea el código QR de tu cita', m2: 'Programa general', m2s: 'Elige un programa de tobillo', m3: 'Mi equipo', m3s: 'Únete con el código de tu equipo',
+    scanT: 'Escanear código de rutina', scanHint: 'Apunta la cámara al código QR que te muestra tu fisioterapeuta.', simulate: 'Simular escaneo',
+    teamT: 'Código de equipo', teamHint: 'Tu entrenador te da este código.', join: 'Unirme',
+    confirmGen: 'Un profesional de la salud vio mi tobillo y me dijo que un programa general es adecuado para mí.',
+    today: 'Hoy', progress: 'Progreso', share: 'Compartir', safety: 'Alarma',
+    markDone: 'Marcar sesión hecha', painQ: 'Dolor ahora (opcional)', noteQ: 'Nota (opcional)', save: 'Guardar sesión', saved: 'Sesión guardada.',
+    sessions: 'sesiones hechas esta semana', perSide: 'por lado', moveOn: 'Pasa a la siguiente etapa cuando',
+    shareT: 'Compartir mi registro', shareHint: 'Elige qué incluir. Tú lo envías, por WhatsApp, correo o impreso.', sendPdf: 'Crear PDF y compartir',
+    shareDone: 'Aquí se abriría el menú de compartir de tu celular.', incDates: 'Fechas y sesiones hechas', incPain: 'Dolor', incNotes: 'Notas',
+    reminders: 'Recordatorios en tus días de rutina a las', days: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'], noSessions: 'Aún no hay sesiones.',
+  },
+};
+const t = (k) => L[S.lang][k];
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const dose = (it) => (it.reps != null ? `${it.sets} × ${it.reps}` : `${it.sets} × ${it.sec} s`) + (EX[it.ex].perSide ? ` ${t('perSide')}` : '');
+
+// Sample prescribed routine, as if decoded from a physio's QR code.
+const SAMPLE = { title: { en: 'Routine from your physio', es: 'Rutina de tu fisioterapeuta' }, stage: { en: 'Strength', es: 'Fuerza' }, days: [1, 3, 5],
+  items: [{ ex: 'knee_to_wall', sets: 2, reps: 10 }, { ex: 'band_eversion', sets: 3, reps: 12 }, { ex: 'heel_raise_double', sets: 3, reps: 15 }, { ex: 'single_leg_stance', sets: 3, sec: 30 }] };
+
+function go(screen) { S.history.push(S.screen); S.screen = screen; render(); }
+function back() { S.screen = S.history.pop() || 'lang'; render(); }
+
+function safetyBox() {
+  const s = C['safety-checklist'][S.lang];
+  return `<div class="safety"><h2>${esc(s.title)}</h2><ul>${s.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
+    <strong>${esc(s.action)}</strong><div style="margin-top:6px">${s.emergency[S.country].map((n) => `${esc(n.label)}: <a href="tel:${n.number}">${n.number}</a>`).join(' · ')}</div></div>`;
+}
+
+const screens = {
+  lang: () => ({ title: t('welcome'), body: `<p>${t('chooseLang')}</p>
+    <button class="choice ${S.lang === 'es' ? 'on' : ''}" onclick="S.lang='es';render()">Español</button>
+    <button class="choice ${S.lang === 'en' ? 'on' : ''}" onclick="S.lang='en';render()">English</button>
+    <p style="margin-top:20px">${t('country')}</p>
+    <button class="choice ${S.country === 'PE' ? 'on' : ''}" onclick="S.country='PE';render()">${t('pe')}</button>
+    <button class="choice ${S.country === 'US' ? 'on' : ''}" onclick="S.country='US';render()">${t('us')}</button>
+    <button class="btn" onclick="go('consent')">${t('next')}</button>` }),
+  consent: () => ({ title: t('consentT'), body: `<p class="notice">${esc(C['intended-use'].notice[S.lang])}</p>
+    ${['consent1', 'consent2', 'consent3'].map((k) => `<label class="check"><input type="checkbox" class="cc" onchange="S.consent=[...document.querySelectorAll('.cc')].every(c=>c.checked);document.getElementById('ok').disabled=!S.consent"> ${t(k)}</label>`).join('')}
+    <button class="btn" id="ok" disabled onclick="go('safetyOnboard')">${t('agree')}</button>` }),
+  safetyOnboard: () => ({ title: t('safetyT'), body: `${safetyBox()}
+    <label class="check"><input type="checkbox" onchange="document.getElementById('ok').disabled=!this.checked"> ${t('safetyConfirm')}</label>
+    <button class="btn" id="ok" disabled onclick="go('mode')">${t('next')}</button>` }),
+  mode: () => ({ title: t('start'), body: [['scan', 'm1', 'm1s'], ['programs', 'm2', 'm2s'], ['team', 'm3', 'm3s']].map(([s, a, b]) =>
+    `<button class="choice" onclick="go('${s}')">${t(a)}<small>${t(b)}</small></button>`).join('') }),
+  scan: () => ({ title: t('scanT'), body: `<p class="muted">${t('scanHint')}</p><div class="scan"></div>
+    <button class="btn" onclick="S.mode='prescribed';S.routine=SAMPLE;S.title=SAMPLE.title[S.lang];S.history=[];S.screen='today';render()">${t('simulate')}</button>` }),
+  programs: () => ({ title: t('m2'), body: C.programs.programs.map((p, i) => `<button class="choice" onclick="pickProgram(${i})">${esc(p.name[S.lang])}<small>${esc(p.for[S.lang])}</small></button>`).join('') +
+    `<div id="confirm"></div>` }),
+  team: () => ({ title: t('teamT'), body: `<p class="muted">${t('teamHint')}</p><input style="width:100%;padding:14px;font-size:20px;letter-spacing:4px;border:1px solid var(--line);border-radius:12px" placeholder="ABC123">
+    <p class="notice">${esc(C['intended-use'].modes.team[S.lang])}</p>
+    <button class="btn" onclick="pickTeam()">${t('join')}</button>` }),
+  today: () => {
+    const r = S.routine; const done = S.log.length;
+    return { title: S.title, tabs: true, body: `<p class="muted">${r.stage ? esc(r.stage[S.lang] || r.stage) + ' · ' : ''}${r.days.map((d) => t('days')[d]).join(', ')}</p>
+      <p class="notice">${esc(C['intended-use'].modes[S.mode][S.lang])}</p>
+      ${r.items.map((it) => `<div class="ex"><div class="t"><strong>${esc(EX[it.ex].name[S.lang])}</strong><div class="d">${dose(it)}</div></div><input type="checkbox" aria-label="done"></div>`).join('')}
+      ${r.moveOnWhen ? `<p class="notice"><strong>${t('moveOn')}:</strong> ${esc(r.moveOnWhen[S.lang])}</p>` : ''}
+      <button class="btn" onclick="go('logSession')">${t('markDone')}</button>
+      <p class="muted" style="margin-top:12px">${t('reminders')} 18:00 · ${done} ${t('sessions')}</p>` };
+  },
+  logSession: () => ({ title: t('markDone'), body: `<p>${t('painQ')}</p><div class="pain">${Array.from({ length: 11 }, (_, i) => `<button class="${S.pain === i ? 'on' : ''}" onclick="S.pain=${i};render()">${i}</button>`).join('')}</div>
+    <p style="margin-top:16px">${t('noteQ')}</p><textarea id="note"></textarea>
+    ${safetyBox()}
+    <button class="btn" onclick="S.log.push({d:new Date(),pain:S.pain,note:document.getElementById('note').value});S.pain=null;S.history=[];S.screen='today';render();toast(t('saved'))">${t('save')}</button>` }),
+  progress: () => {
+    const now = new Date(); const start = new Date(now); start.setDate(now.getDate() - 20 - now.getDay());
+    const doneDays = new Set(S.log.map((l) => l.d.toDateString()));
+    const cells = Array.from({ length: 21 + now.getDay() + 1 }, (_, i) => { const d = new Date(start); d.setDate(start.getDate() + i); return `<div class="${doneDays.has(d.toDateString()) ? 'done' : ''}">${d.getDate()}</div>`; });
+    return { title: t('progress'), tabs: true, body: `<div class="cal">${t('days').map((d) => `<div class="h">${d}</div>`).join('')}${cells.join('')}</div>
+      <p style="margin-top:16px">${S.log.length ? S.log.map((l) => `${l.d.toLocaleDateString(S.lang)} · ${l.pain ?? '–'}/10 ${esc(l.note || '')}`).join('<br>') : t('noSessions')}</p>` };
+  },
+  share: () => ({ title: t('shareT'), tabs: true, body: `<p class="safety" style="border-width:1.5px;color:var(--ink)"><strong>${esc(C['intended-use'].shareNotice[S.lang])}</strong></p>
+    <p class="muted">${t('shareHint')}</p>
+    ${['incDates', 'incPain', 'incNotes'].map((k) => `<label class="share-row"><span>${t(k)}</span><input type="checkbox" ${S.shareOmit[k] ? '' : 'checked'} ${k === 'incDates' ? 'disabled' : ''} onchange="S.shareOmit['${k}']=!this.checked"></label>`).join('')}
+    <button class="btn" onclick="toast(t('shareDone'))">${t('sendPdf')}</button>` }),
+  safety: () => ({ title: t('safetyT'), tabs: true, body: safetyBox() + `<p class="notice">${esc(C['intended-use'].notice[S.lang])}</p>` }),
+};
+
+function pickProgram(i) {
+  const p = C.programs.programs[i];
+  const use = () => { const s = p.stages[0]; S.mode = 'general'; S.routine = { ...s, stage: s.name }; S.title = p.name[S.lang]; S.history = []; S.screen = 'today'; render(); };
+  if (!p.requiresConfirmation) return use();
+  document.getElementById('confirm').innerHTML = `<label class="check"><input type="checkbox" id="cf"> ${t('confirmGen')}</label><button class="btn" onclick="if(document.getElementById('cf').checked)window.__use()">${t('next')}</button>`;
+  window.__use = use;
+}
+function pickTeam() {
+  const w = C['team-warmup'];
+  S.mode = 'team'; S.routine = { days: w.days, items: w.blocks.flatMap((b) => b.items) }; S.title = w.name[S.lang]; S.history = []; S.screen = 'today'; render();
+}
+function toast(msg) { const d = document.createElement('div'); d.className = 'toast'; d.textContent = msg; document.getElementById('main').appendChild(d); setTimeout(() => d.remove(), 2500); }
+
+function render() {
+  document.documentElement.lang = S.lang;
+  const v = screens[S.screen]();
+  document.getElementById('hdr').innerHTML = `${S.history.length && !v.tabs ? '<button class="back" onclick="back()" aria-label="back">‹</button>' : ''}<h1>${esc(v.title)}</h1>`;
+  document.getElementById('main').innerHTML = v.body;
+  const tabs = document.getElementById('tabs');
+  tabs.style.display = v.tabs ? 'flex' : 'none';
+  tabs.innerHTML = ['today', 'progress', 'share', 'safety'].map((k) => `<button class="${S.screen === k ? 'on' : ''}" onclick="S.history=[];S.screen='${k}';render()">${t(k)}</button>`).join('');
+}
+render();
+</script>
+</body>
+</html>

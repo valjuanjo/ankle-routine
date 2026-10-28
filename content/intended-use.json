@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "modes": {
+    "prescribed": {
+      "en": "Helps you schedule and keep track of the exercises your physio prescribed.",
+      "es": "Te ayuda a programar y llevar el registro de los ejercicios que te indicó tu fisioterapeuta."
+    },
+    "general": {
+      "en": "A general ankle exercise and prevention program. Tells you when to see a professional.",
+      "es": "Un programa general de ejercicios y prevención para el tobillo. Te dice cuándo ver a un profesional."
+    },
+    "team": {
+      "en": "A warm-up and prevention routine for your team.",
+      "es": "Una rutina de calentamiento y prevención para tu equipo."
+    }
+  },
+  "notice": {
+    "en": "This app is not a diagnosis or treatment, and no one monitors what you log. If your ankle gets worse, contact your physio or go to urgent care.",
+    "es": "Esta app no es un diagnóstico ni un tratamiento, y nadie supervisa lo que registras. Si tu tobillo empeora, contacta a tu fisioterapeuta o acude a emergencias."
+  },
+  "shareNotice": {
+    "en": "This is a record for your next visit. No one is monitoring it. If your ankle gets worse, contact your physio or go to urgent care.",
+    "es": "Este es un registro para tu próxima cita. Nadie lo está supervisando. Si tu tobillo empeora, contacta a tu fisioterapeuta o acude a emergencias."
+  }
+}

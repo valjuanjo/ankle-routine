@@ -1,0 +1,12 @@
+{
+  "name": "ankle-routine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/validate-content.mjs && node scripts/lint-wording.mjs",
+    "print": "node scripts/build-print.mjs"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

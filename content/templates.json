@@ -1,0 +1,61 @@
+{
+  "version": "0.1.0",
+  "status": "draft: pending clinician review",
+  "note": "Starting points a physio picks and adjusts at the visit. Item keys match the QR routine format: ex, sets, reps or sec.",
+  "templates": [
+    {
+      "id": "acute",
+      "name": { "en": "Early stage", "es": "Etapa inicial" },
+      "days": [1, 2, 3, 4, 5, 6, 0],
+      "items": [
+        { "ex": "ankle_pumps", "sets": 2, "reps": 20 },
+        { "ex": "ankle_alphabet", "sets": 1, "reps": 1 }
+      ]
+    },
+    {
+      "id": "mobility",
+      "name": { "en": "Mobility", "es": "Movilidad" },
+      "days": [1, 3, 5, 0],
+      "items": [
+        { "ex": "ankle_alphabet", "sets": 1, "reps": 1 },
+        { "ex": "knee_to_wall", "sets": 2, "reps": 10 },
+        { "ex": "calf_stretch", "sets": 3, "sec": 30 },
+        { "ex": "heel_raise_double", "sets": 2, "reps": 10 }
+      ]
+    },
+    {
+      "id": "strength",
+      "name": { "en": "Strength", "es": "Fuerza" },
+      "days": [1, 3, 5],
+      "items": [
+        { "ex": "band_eversion", "sets": 3, "reps": 12 },
+        { "ex": "band_inversion", "sets": 3, "reps": 12 },
+        { "ex": "band_dorsiflexion", "sets": 3, "reps": 12 },
+        { "ex": "band_plantarflexion", "sets": 3, "reps": 12 },
+        { "ex": "heel_raise_double", "sets": 3, "reps": 15 }
+      ]
+    },
+    {
+      "id": "balance",
+      "name": { "en": "Balance", "es": "Equilibrio" },
+      "days": [1, 2, 3, 4, 5],
+      "items": [
+        { "ex": "single_leg_stance", "sets": 3, "sec": 30 },
+        { "ex": "single_leg_reach", "sets": 2, "reps": 6 },
+        { "ex": "heel_raise_single", "sets": 3, "reps": 10 }
+      ]
+    },
+    {
+      "id": "return_to_activity",
+      "name": { "en": "Back to activity", "es": "Vuelta a la actividad" },
+      "days": [1, 3, 5],
+      "items": [
+        { "ex": "single_leg_eyes_closed", "sets": 3, "sec": 20 },
+        { "ex": "heel_raise_single", "sets": 3, "reps": 15 },
+        { "ex": "double_leg_hops", "sets": 3, "reps": 15 },
+        { "ex": "lateral_hops", "sets": 3, "reps": 10 },
+        { "ex": "hop_and_stick", "sets": 2, "reps": 6 }
+      ]
+    }
+  ]
+}
