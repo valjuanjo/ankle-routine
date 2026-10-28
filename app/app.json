@@ -40,7 +40,16 @@
           "recordAudioAndroid": false
         }
       ],
-      "expo-notifications"
+      "expo-notifications",
+      [
+        "expo-calendar",
+        {
+          "writeOnlyAccess": true,
+          "writeOnlyCalendarPermission": "Adds your exercise days to your calendar. The app never reads your calendar.",
+          "calendarPermission": "Adds your exercise days to your calendar.",
+          "remindersPermission": false
+        }
+      ]
     ],
     "scheme": "ankleroutine"
   }

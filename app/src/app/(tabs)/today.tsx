@@ -38,6 +38,7 @@ export default function Today() {
       </Card>
       <RoutineItems items={r.items} />
       <Button title={s.logSession} onPress={() => router.push('/log')} />
+      <Button kind="secondary" title={`📅 ${s.addToCalendar}`} onPress={() => router.push('/calendar')} />
       {info.moveOnWhen ? (
         <View style={{ marginTop: 12 }}>
           <Notice>{s.moveOnWhen}: {info.moveOnWhen}</Notice>

@@ -1,6 +1,7 @@
 // Local notifications on routine days. Scheduled on the phone; nothing is sent anywhere.
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import { parseHHMM } from './calendarPlan';
 import type { Strings } from './i18n';
 import { toNotificationWeekday } from './schedule';
 
@@ -16,12 +17,7 @@ Notifications.setNotificationHandler({
 const CHANNEL = 'routine-reminders';
 
 /** Parses "HH:MM"; falls back to 18:00. */
-export function parseTime(v: string | undefined): { hour: number; minute: number } {
-  const m = /^(\d{1,2}):(\d{2})$/.exec(v ?? '');
-  const hour = m ? Number(m[1]) : 18;
-  const minute = m ? Number(m[2]) : 0;
-  return hour < 24 && minute < 60 ? { hour, minute } : { hour: 18, minute: 0 };
-}
+export const parseTime = (v: string | undefined) => parseHHMM(v ?? '');
 
 export async function ensurePermission(): Promise<boolean> {
   const current = await Notifications.getPermissionsAsync();

@@ -43,6 +43,7 @@ export default function Settings() {
         </View>
       ) : null}
 
+      <Button kind="secondary" title={s.addToCalendar} onPress={() => router.push('/calendar')} />
       <Button kind="secondary" title={s.changeRoutine} onPress={() => router.push('/start')} />
 
       <H2>{s.about}</H2>

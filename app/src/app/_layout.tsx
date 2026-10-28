@@ -17,6 +17,7 @@ function RootStack() {
       <Stack.Screen name="scan" options={{ title: s.scanTitle }} />
       <Stack.Screen name="programs" options={{ title: s.modeGeneral }} />
       <Stack.Screen name="team" options={{ title: s.modeTeam }} />
+      <Stack.Screen name="calendar" options={{ title: s.calendarTitle }} />
       <Stack.Screen name="log" options={{ title: s.logTitle, presentation: 'modal' }} />
       <Stack.Screen name="exercise/[id]" options={{ title: '' }} />
     </Stack>

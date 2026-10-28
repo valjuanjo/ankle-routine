@@ -15,6 +15,10 @@ export interface Settings {
   reminderTime: string;
   /** When the patient accepted the onboarding consent, ISO timestamp. */
   consentAt?: string;
+  /** JSON array of calendar event ids this app created, so they can be replaced or removed. */
+  calendarEventIds?: string;
+  /** Routine id those events were created for. */
+  calendarRoutineId?: string;
 }
 
 interface AppState {
@@ -52,6 +56,8 @@ function fromStored(raw: Record<string, string>): Settings {
     remindersOn: raw.remindersOn ? raw.remindersOn === '1' : d.remindersOn,
     reminderTime: raw.reminderTime ?? d.reminderTime,
     consentAt: raw.consentAt,
+    calendarEventIds: raw.calendarEventIds,
+    calendarRoutineId: raw.calendarRoutineId,
   };
 }
 

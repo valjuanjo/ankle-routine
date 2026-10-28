@@ -72,10 +72,11 @@ npx tsx scripts/make-routine-qr.mts ../demo/demo-routine.json ../demo/demo-routi
 - **Progress:** calendar, week-by-week completion, pain trend, history (long-press to delete).
 - **Share:** choose the period, include/exclude pain and notes, remove individual sessions, then create a PDF and send it through the phone's share menu. The share notice ("No one is monitoring it") is on the screen and on the PDF.
 - **Reminders:** local weekly notifications on routine days.
+- **Add to calendar (MVP):** from Today or Settings, choose time and length (3/6/12 weeks), then add weekly repeating events to the phone's calendar (iOS write-only access; Android primary calendar; removable later) or get an `.ics` file for any calendar app. Events contain only a generic title and, optionally, the exercise list — never pain or notes.
 - **Data:** SQLite on the phone only. No server, no analytics SDKs. "Delete all my data" in Settings.
 
 **Verified here:** unit tests (QR codec, schedule math, PDF content, content sync, wording), TypeScript, Android JS bundle, and a full click-through of the web build (onboarding → paste code → log → progress → share → language switch → reload persistence).
-**Not yet verified:** a run on a physical phone (camera scanning, notifications and the PDF share sheet are native-only). Build a development build with EAS and test on one Android and one iPhone before Nov 19.
+**Not yet verified:** a run on a physical phone (camera scanning, notifications, the PDF share sheet and writing to the phone calendar are native-only). Build a development build with EAS and test on one Android and one iPhone before Nov 19.
 
 ## Open items that need a person
 

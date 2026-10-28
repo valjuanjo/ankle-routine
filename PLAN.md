@@ -128,10 +128,18 @@ All content lives in versioned JSON files.
 - SQLite on the device; works fully offline.
 
 **Step 3, Phase 2 (MVP):**
-- Simple web page for physios to build a routine and generate the QR code.
-- Team mode with a backend (Supabase): coach creates a team, athletes join with a code, coach sees aggregate completion.
-- Optional view-only share links with expiry and revoke.
-- Opt-in, privacy-friendly analytics for completion and sharing rates.
+
+> **Scope change (Oct 28):** the MVP shows one new feature, **add to calendar**. The items below it are deferred until after the Dec 5 decision gates.
+
+- [x] **Add to calendar** → `app/src/app/calendar.tsx`, `app/src/lib/calendar.ts`, `app/src/lib/calendarPlan.ts`. From Today or Settings: pick time and length (3, 6 or 12 weeks), then either
+  - add one weekly repeating event per routine day to the phone's own calendar (iOS asks for write-only access, so the app never reads the calendar; Android uses the primary writable calendar), with a 15-minute alert and a "Remove from my calendar" button, or
+  - get an `.ics` file for Google Calendar, Apple Calendar or Outlook (also works on the web).
+  - The event has only a generic title ("Ejercicios de tobillo") and, if the patient keeps it on, the exercise list, plus the "if it gets worse" line. It never includes pain scores or notes, because calendars sync to Google/iCloud/Outlook.
+  - Tested: unit tests, `.ics` parsed and expanded by an independent iCalendar library (6 weeks × 3 days = 18 sessions), web click-through with download. **Not yet tested on a phone** (native calendar write).
+- Deferred: Simple web page for physios to build a routine and generate the QR code (stand-in for now: `app/scripts/make-routine-qr.mts`).
+- Deferred: Team mode with a backend (Supabase): coach creates a team, athletes join with a code, coach sees aggregate completion.
+- Deferred: Optional view-only share links with expiry and revoke.
+- Deferred: Opt-in, privacy-friendly analytics for completion and sharing rates.
 
 ### D. Lima clinic pilot
 
@@ -214,7 +222,8 @@ Legend: `[x]` done · `[ ]` + "→ ready" means the materials are done and the r
 ### Phase 2: Nov 20 – Dec 31
 - [ ] Nov 25: Lima pilot completes 3 weeks; Nov 30: Madison pilot completes
 - [ ] Dec 1–5: Decision gates
-- [ ] December: Build the MVP (Step 3) around the stronger channel
+- [x] December: Build the MVP (Step 3), scoped to add-to-calendar (built early, Oct 28; see Step 3)
+- [ ] Test add-to-calendar on one Android phone and one iPhone; ask the Peru data-protection lawyer about exercise names syncing to Google/iCloud calendars
 - [ ] By Dec 31: Law Clinic opinion; Peru data-protection review; content v1.0 reviewed
 
 ### Phase 3: Jan – Mar 2027
