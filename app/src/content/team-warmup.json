@@ -1,0 +1,45 @@
+{
+  "version": "0.1.0",
+  "status": "draft: pending clinician review",
+  "id": "team_warmup",
+  "mode": "team",
+  "name": { "en": "Team ankle warm-up", "es": "Calentamiento de tobillo para el equipo" },
+  "minutes": 15,
+  "frequency": { "en": "2–3 times a week, before practice", "es": "2–3 veces por semana, antes del entrenamiento" },
+  "days": [1, 3, 5],
+  "blocks": [
+    {
+      "name": { "en": "1. Jog (4 min)", "es": "1. Trote (4 min)" },
+      "items": [{ "ex": "jog_with_ankle_drills", "sets": 1, "sec": 240 }]
+    },
+    {
+      "name": { "en": "2. Mobility (2 min)", "es": "2. Movilidad (2 min)" },
+      "items": [
+        { "ex": "knee_to_wall", "sets": 1, "reps": 10 },
+        { "ex": "calf_stretch", "sets": 1, "sec": 20 }
+      ]
+    },
+    {
+      "name": { "en": "3. Strength (3 min)", "es": "3. Fuerza (3 min)" },
+      "items": [
+        { "ex": "heel_raise_double", "sets": 2, "reps": 15 },
+        { "ex": "heel_raise_single", "sets": 1, "reps": 10 }
+      ]
+    },
+    {
+      "name": { "en": "4. Balance (3 min)", "es": "4. Equilibrio (3 min)" },
+      "items": [
+        { "ex": "single_leg_stance", "sets": 2, "sec": 30 },
+        { "ex": "single_leg_reach", "sets": 1, "reps": 6 }
+      ]
+    },
+    {
+      "name": { "en": "5. Hops and landings (3 min)", "es": "5. Saltos y caídas (3 min)" },
+      "items": [
+        { "ex": "double_leg_hops", "sets": 1, "reps": 15 },
+        { "ex": "lateral_hops", "sets": 2, "reps": 10 },
+        { "ex": "hop_and_stick", "sets": 1, "reps": 5 }
+      ]
+    }
+  ]
+}

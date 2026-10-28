@@ -1,0 +1,42 @@
+{
+  "name": "ankle-routine",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "dependencies": {
+    "@expo/metro-runtime": "~58.0.15",
+    "expo": "~58.0.21",
+    "expo-camera": "~58.0.14",
+    "expo-constants": "~58.0.14",
+    "expo-linking": "~58.0.15",
+    "expo-localization": "~58.0.5",
+    "expo-notifications": "~58.1.7",
+    "expo-print": "~58.0.8",
+    "expo-router": "~58.0.28",
+    "expo-sharing": "~58.0.21",
+    "expo-sqlite": "~58.0.14",
+    "expo-status-bar": "~58.0.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-safe-area-context": "~5.10.1",
+    "react-native-screens": "~4.30.0",
+    "react-native-web": "~0.21.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "~19.3.0",
+    "qrcode": "^1.5.4",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "sync-content": "node ../scripts/sync-content.mjs"
+  },
+  "private": true
+}

@@ -147,10 +147,10 @@ All content lives in versioned JSON files.
 | Start | Target Nov 4 |
 
 Pre-start checklist:
-- [ ] Consent form: what's recorded, that sharing is optional, that no one monitors the log, and that anonymized counts go to you
-- [ ] Routine cards and video QR codes printed in Spanish
-- [ ] Colleague briefed: no remote review or advice; safety checklist and emergency numbers on every card
-- [ ] Shared logs noted in the clinic's own record at visits
+- [x] Consent form: what's recorded, that sharing is optional, that no one monitors the log, and that anonymized counts go to you → `docs/compliance/consent-lima-es.md` (draft v0.1; fill placeholders, legal review)
+- [ ] Routine cards and video QR codes printed in Spanish → PDFs ready: `print/routine-card-es.pdf`, `print/log-3wk-es.pdf`; rebuild with `VIDEO_URL` once videos are hosted, then print
+- [ ] Colleague briefed: no remote review or advice; safety checklist and emergency numbers on every card → script ready: `docs/pilots/lima-colleague-briefing.md` (safety checklist + numbers are on every card ✓)
+- [ ] Shared logs noted in the clinic's own record at visits (in briefing and consent; clinic does this at visits)
 
 ### E. Madison team pilot
 
@@ -189,22 +189,27 @@ Run the fake door on the web, say on the page whether payments are refunded or t
 
 ## Timeline
 
+Legend: `[x]` done · `[ ]` + "→ ready" means the materials are done and the remaining step needs you (send, meet, print, run).
+
 ### Phase 0: Oct 28 – Nov 3
-- [ ] Oct 28: Share-out (what broke: self-triage and remote monitoring; what changed: routine tool with patient-controlled sharing)
-- [ ] Oct 29: Email Rec Well athletic trainers; brief the clinic colleague
-- [ ] Oct 30: Intended-use sentences in EN/ES
-- [ ] Oct 31: Consent forms for Lima and Madison
-- [ ] Nov 1–2: Exercise library, routine templates and safety checklist v0.1; send to reviewer
-- [ ] Nov 2: Print routine and warm-up cards; clickable prototype
-- [ ] Nov 3: UW self-certification; request Law Clinic appointment
+- [ ] Oct 28: Share-out (what broke: self-triage and remote monitoring; what changed: routine tool with patient-controlled sharing) → ready: `docs/share-out/2026-10-28-share-out.md`
+- [ ] Oct 29: Email Rec Well athletic trainers; brief the clinic colleague → ready: `docs/pilots/madison-recwell-email.md` (+ `print/madison-one-pager.pdf`, `print/team-warmup-card-en.pdf`), `docs/pilots/lima-colleague-briefing.md`
+- [x] Oct 30: Intended-use sentences in EN/ES → `docs/compliance/intended-use.md`, `content/intended-use.json`; enforced by `scripts/lint-wording.mjs`
+- [x] Oct 31: Consent forms for Lima and Madison → `docs/compliance/consent-lima-es.md`, `consent-madison-en.md` (drafts v0.1, pending legal review)
+- [x] Nov 1–2: Exercise library, routine templates and safety checklist v0.1 → `content/` (17 exercises, 5 templates, 2 general programs, team warm-up, safety checklist EN/ES; validated by `scripts/validate-content.mjs`)
+- [ ] Nov 1–2: Send to reviewer → ready: `print/reviewer-packet-v0.1.pdf`
+- [x] Nov 2: Clickable prototype → `prototype/index.html`
+- [ ] Nov 2: Print routine and warm-up cards → ready: `print/*.pdf` (video QR shows "link pending" until videos are hosted)
+- [ ] Nov 3: UW self-certification; request Law Clinic appointment → ready: answers + request email in `docs/compliance/uw-self-cert-and-law-clinic.md`
 
 ### Phase 1: Nov 4 – Nov 19
-- [ ] Nov 4: Lima pilot starts
-- [ ] Nov 5–8: Usability test of prototype and safety checklist with 5 people in Madison and 5 in Lima
-- [ ] Nov 9: Madison team pilot starts
-- [ ] Nov 9–18: Build the IUP (Step 2); launch the Lima fake door page
-- [ ] Mondays: record week-by-week completion and sharing for both pilots
-- [ ] Nov 19: Demo Night: working IUP with QR routine loading and PDF sharing, plus pilot data
+- [ ] Nov 4: Lima pilot starts (tracking sheet ready: `docs/pilots/tracking/lima-weekly.csv`)
+- [ ] Nov 5–8: Usability test of prototype and safety checklist with 5 people in Madison and 5 in Lima → ready: `docs/pilots/usability-test-guide.md`
+- [ ] Nov 9: Madison team pilot starts (tracking sheet ready: `docs/pilots/tracking/madison-weekly.csv`)
+- [x] Nov 9–18: Build the IUP (Step 2) → `app/` (onboarding, consent, safety checklist, QR routine loading, general programs, team warm-up, reminders, log with pain/note, progress, PDF share, SQLite, offline). Tested: unit tests, typecheck, Android bundle, web click-through. **Still to do: test on a physical phone (camera, notifications, share sheet).**
+- [ ] Nov 9–18: Launch the Lima fake door page → ready: `fakedoor/index.html` (host it and set `TRACK_URL`)
+- [ ] Mondays: record week-by-week completion and sharing for both pilots → fill the CSVs, run `node scripts/pilot-report.mjs`
+- [ ] Nov 19: Demo Night: working IUP with QR routine loading and PDF sharing, plus pilot data → app + demo QR ready (`demo/demo-routine.png`); pilot data comes from the pilots
 
 ### Phase 2: Nov 20 – Dec 31
 - [ ] Nov 25: Lima pilot completes 3 weeks; Nov 30: Madison pilot completes

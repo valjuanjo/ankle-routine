@@ -1,0 +1,139 @@
+{
+  "version": "0.1.0",
+  "status": "draft: pending clinician review",
+  "note": "General programs. Progression criteria are generic and published. The user decides when to move on; the app never unlocks a stage by itself.",
+  "programs": [
+    {
+      "id": "prevention_6wk",
+      "mode": "general",
+      "name": { "en": "6-week ankle prevention program", "es": "Programa de prevención de tobillo de 6 semanas" },
+      "for": {
+        "en": "For people with a 'weak' ankle or past sprains who can walk, jog and hop without pain.",
+        "es": "Para personas con un tobillo 'débil' o esguinces anteriores que pueden caminar, trotar y saltar sin dolor."
+      },
+      "stages": [
+        {
+          "id": "w1_2",
+          "name": { "en": "Weeks 1–2", "es": "Semanas 1–2" },
+          "weeks": 2,
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "knee_to_wall", "sets": 2, "reps": 10 },
+            { "ex": "heel_raise_double", "sets": 3, "reps": 15 },
+            { "ex": "band_eversion", "sets": 3, "reps": 12 },
+            { "ex": "single_leg_stance", "sets": 3, "sec": 30 }
+          ],
+          "moveOnWhen": {
+            "en": "You've done most sessions and can balance 30 seconds on each leg without pain.",
+            "es": "Hiciste la mayoría de sesiones y puedes mantener el equilibrio 30 segundos en cada pierna sin dolor."
+          }
+        },
+        {
+          "id": "w3_4",
+          "name": { "en": "Weeks 3–4", "es": "Semanas 3–4" },
+          "weeks": 2,
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "heel_raise_single", "sets": 3, "reps": 12 },
+            { "ex": "band_eversion", "sets": 3, "reps": 15 },
+            { "ex": "single_leg_eyes_closed", "sets": 3, "sec": 20 },
+            { "ex": "single_leg_reach", "sets": 2, "reps": 6 },
+            { "ex": "double_leg_hops", "sets": 3, "reps": 15 }
+          ],
+          "moveOnWhen": {
+            "en": "You can do 12 single-leg heel raises on each side and balance 20 seconds with eyes closed, without pain.",
+            "es": "Puedes hacer 12 elevaciones de talón en una pierna por lado y mantener el equilibrio 20 segundos con ojos cerrados, sin dolor."
+          }
+        },
+        {
+          "id": "w5_6",
+          "name": { "en": "Weeks 5–6", "es": "Semanas 5–6" },
+          "weeks": 2,
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "heel_raise_single", "sets": 3, "reps": 15 },
+            { "ex": "single_leg_eyes_closed", "sets": 3, "sec": 30 },
+            { "ex": "lateral_hops", "sets": 3, "reps": 10 },
+            { "ex": "hop_and_stick", "sets": 2, "reps": 6 }
+          ],
+          "moveOnWhen": {
+            "en": "Keep 2 sessions a week, or switch to the team warm-up before sport.",
+            "es": "Mantén 2 sesiones por semana, o cambia al calentamiento de equipo antes del deporte."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mild_sprain_general",
+      "mode": "general",
+      "name": { "en": "General program after a mild ankle sprain", "es": "Programa general después de un esguince leve de tobillo" },
+      "for": {
+        "en": "Only after a health professional has seen your ankle and said a general program is fine for you.",
+        "es": "Solo después de que un profesional de la salud haya visto tu tobillo y te haya dicho que un programa general es adecuado para ti."
+      },
+      "requiresConfirmation": true,
+      "stages": [
+        {
+          "id": "s1_move",
+          "name": { "en": "Stage 1: Move", "es": "Etapa 1: Mover" },
+          "days": [1, 2, 3, 4, 5, 6, 0],
+          "items": [
+            { "ex": "ankle_pumps", "sets": 2, "reps": 20 },
+            { "ex": "ankle_alphabet", "sets": 1, "reps": 1 },
+            { "ex": "calf_stretch", "sets": 3, "sec": 30 }
+          ],
+          "moveOnWhen": {
+            "en": "You can walk normally without limping or pain.",
+            "es": "Puedes caminar normal, sin cojear ni sentir dolor."
+          }
+        },
+        {
+          "id": "s2_strength",
+          "name": { "en": "Stage 2: Strength", "es": "Etapa 2: Fuerza" },
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "knee_to_wall", "sets": 2, "reps": 10 },
+            { "ex": "band_eversion", "sets": 3, "reps": 12 },
+            { "ex": "band_inversion", "sets": 3, "reps": 12 },
+            { "ex": "heel_raise_double", "sets": 3, "reps": 15 },
+            { "ex": "single_leg_stance", "sets": 3, "sec": 30 }
+          ],
+          "moveOnWhen": {
+            "en": "You can balance 30 seconds on one leg without pain.",
+            "es": "Puedes mantener el equilibrio 30 segundos en una pierna sin dolor."
+          }
+        },
+        {
+          "id": "s3_balance",
+          "name": { "en": "Stage 3: Balance", "es": "Etapa 3: Equilibrio" },
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "heel_raise_single", "sets": 3, "reps": 10 },
+            { "ex": "single_leg_eyes_closed", "sets": 3, "sec": 20 },
+            { "ex": "single_leg_reach", "sets": 2, "reps": 6 },
+            { "ex": "band_eversion", "sets": 3, "reps": 15 }
+          ],
+          "moveOnWhen": {
+            "en": "You can do 10 single-leg heel raises and hop gently on both feet without pain.",
+            "es": "Puedes hacer 10 elevaciones de talón en una pierna y saltar suave con dos pies sin dolor."
+          }
+        },
+        {
+          "id": "s4_activity",
+          "name": { "en": "Stage 4: Back to activity", "es": "Etapa 4: Vuelta a la actividad" },
+          "days": [1, 3, 5],
+          "items": [
+            { "ex": "heel_raise_single", "sets": 3, "reps": 15 },
+            { "ex": "double_leg_hops", "sets": 3, "reps": 15 },
+            { "ex": "lateral_hops", "sets": 3, "reps": 10 },
+            { "ex": "hop_and_stick", "sets": 2, "reps": 6 }
+          ],
+          "moveOnWhen": {
+            "en": "Before going back to sport, check with your physio, athletic trainer or coach.",
+            "es": "Antes de volver a tu deporte, consulta con tu fisioterapeuta, preparador físico o entrenador."
+          }
+        }
+      ]
+    }
+  ]
+}

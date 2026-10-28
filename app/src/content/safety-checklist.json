@@ -1,0 +1,43 @@
+{
+  "version": "0.1.0",
+  "status": "draft: pending clinician review",
+  "note": "Fixed list, the same for everyone. Written separately in English and Peruvian Spanish, not translated line by line. The app never alerts anyone.",
+  "en": {
+    "title": "Stop and get checked if any of these apply",
+    "items": [
+      "You can't put weight on your foot or take 4 steps",
+      "Your ankle or foot looks deformed or out of place",
+      "Your foot is numb, tingling, cold or pale",
+      "You felt or heard a \"pop\" at the back of your heel, or can't push off your toes",
+      "Your calf is painful, swollen, warm or red",
+      "Pain or swelling is getting worse instead of better"
+    ],
+    "action": "Don't do the exercises. Contact your physio or go to urgent care.",
+    "emergency": {
+      "US": [{ "label": "Emergency", "number": "911" }],
+      "PE": [
+        { "label": "SAMU (ambulancia)", "number": "106" },
+        { "label": "Bomberos", "number": "116" }
+      ]
+    }
+  },
+  "es": {
+    "title": "Detente y hazte revisar si te pasa algo de esto",
+    "items": [
+      "No puedes apoyar el pie o no logras dar 4 pasos",
+      "El tobillo o el pie se ve deformado o fuera de lugar",
+      "Sientes el pie dormido, con hormigueo, frío o pálido",
+      "Sentiste o escuchaste un \"chasquido\" detrás del talón, o no puedes empujar con la punta del pie",
+      "La pantorrilla te duele, está hinchada, caliente o roja",
+      "El dolor o la hinchazón empeoran en vez de mejorar"
+    ],
+    "action": "No hagas los ejercicios. Contacta a tu fisioterapeuta o acude a emergencias.",
+    "emergency": {
+      "US": [{ "label": "Emergencias", "number": "911" }],
+      "PE": [
+        { "label": "SAMU (ambulancia)", "number": "106" },
+        { "label": "Bomberos", "number": "116" }
+      ]
+    }
+  }
+}

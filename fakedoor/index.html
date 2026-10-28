@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programa de Tobillo</title>
+<meta name="description" content="Un programa general de ejercicios y prevención para el tobillo. Te dice cuándo ver a un profesional.">
+<style>
+  :root { --ink: #1d2433; --muted: #5b6577; --brand: #0f4c5c; --soft: #e6f0f2; --line: #d5dbe1; --bg: #f6f7f9; --yape: #742284; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 17px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+  main { max-width: 640px; margin: 0 auto; padding: 28px 16px 48px; }
+  h1 { font-size: 30px; line-height: 1.2; color: var(--brand); margin: 0 0 10px; }
+  h2 { font-size: 20px; color: var(--brand); margin: 28px 0 8px; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0 0 18px; }
+  ul { padding-left: 20px; } li { margin: 6px 0; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-top: 20px; }
+  .price { font-size: 40px; font-weight: 800; color: var(--ink); }
+  .price small { font-size: 16px; font-weight: 400; color: var(--muted); }
+  button { display: block; width: 100%; padding: 16px; border-radius: 12px; border: none; font-size: 17px; font-weight: 700; margin-top: 12px; cursor: pointer; }
+  .yape { background: var(--yape); color: #fff; }
+  .plin { background: #00b4c5; color: #fff; }
+  .cardpay { background: var(--soft); color: var(--brand); }
+  .terms { font-size: 14px; color: var(--muted); margin-top: 12px; }
+  .notice { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; margin-top: 28px; }
+  dialog { border: none; border-radius: 16px; padding: 22px; max-width: 420px; width: calc(100% - 32px); }
+  dialog::backdrop { background: rgba(0,0,0,.4); }
+  input { width: 100%; padding: 13px; font-size: 16px; border: 1px solid var(--line); border-radius: 10px; margin-top: 8px; }
+  .ok { color: var(--brand); font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <h1>¿Tu tobillo se tuerce seguido?</h1>
+  <p class="lead">Un programa general de ejercicios y prevención para el tobillo. Te dice cuándo ver a un profesional.</p>
+
+  <ul>
+    <li><strong>6 semanas</strong>, 3 sesiones por semana de unos 15 minutos, en casa.</li>
+    <li>Videos cortos de cada ejercicio, en español, hechos por un fisioterapeuta.</li>
+    <li>Recordatorios en tu celular y un registro de tus sesiones que puedes enseñar a tu fisioterapeuta o entrenador, si quieres.</li>
+    <li>Criterios claros para avanzar de etapa, por ejemplo: "mantener el equilibrio 30 segundos en una pierna sin dolor".</li>
+    <li>Tus datos se quedan en tu celular.</li>
+  </ul>
+
+  <h2>¿Para quién es?</h2>
+  <p>Para personas con un tobillo "débil" o esguinces anteriores que pueden caminar, trotar y saltar sin dolor. Si te acabas de torcer el tobillo, primero ve a un profesional.</p>
+
+  <div class="card">
+    <div class="price">S/ <span id="price">25</span> <small>pago único · 6 semanas</small></div>
+    <button class="yape" data-method="yape">Pagar con Yape</button>
+    <button class="plin" data-method="plin">Pagar con Plin</button>
+    <button class="cardpay" data-method="card">Pagar con tarjeta</button>
+    <p class="terms"><strong>Pre-venta:</strong> el programa todavía se está preparando. Hoy no te cobramos nada; te avisamos cuando esté listo y recién ahí decides si pagas.</p>
+  </div>
+
+  <p class="notice">Esta app no es un diagnóstico ni un tratamiento, y nadie supervisa lo que registras. Si tu tobillo empeora, contacta a tu fisioterapeuta o acude a emergencias. Emergencias: SAMU 106.</p>
+</main>
+
+<dialog id="dlg">
+  <p class="ok">¡Gracias por tu interés!</p>
+  <p>El programa todavía no está disponible, así que <strong>no se realizó ningún cobro</strong>.</p>
+  <p>¿Quieres que te avisemos cuando esté listo? (opcional)</p>
+  <form id="lead" method="dialog">
+    <input id="contact" placeholder="Tu WhatsApp o correo" autocomplete="tel" maxlength="80">
+    <label style="display:flex;gap:8px;margin-top:10px;font-size:14px;color:var(--muted)"><input type="checkbox" id="ok" style="width:auto;margin:2px 0 0"> Acepto que usen este dato solo para avisarme del lanzamiento. Puedo pedir que lo borren cuando quiera.</label>
+    <button class="yape" style="background:var(--brand)" value="send">Avísame</button>
+    <button class="cardpay" value="close">Cerrar</button>
+  </form>
+</dialog>
+
+<script>
+// Fake-door pricing test (plan section F). Counts visits and "tries to pay" per source and price.
+// Set TRACK_URL to an endpoint that accepts POSTed JSON (e.g. a form or sheet webhook). Without it, events only go to the console.
+// Price variant: ?p=15|25|40. Source: ?src=instagram (or utm_source).
+const TRACK_URL = '';
+const PRICES = ['15', '25', '40'];
+const q = new URLSearchParams(location.search);
+const price = PRICES.includes(q.get('p')) ? q.get('p') : PRICES[Math.floor(Math.random() * PRICES.length)];
+const src = (q.get('src') || q.get('utm_source') || (document.referrer ? new URL(document.referrer).hostname : 'direct')).slice(0, 40);
+document.getElementById('price').textContent = price;
+
+function track(event, extra = {}) {
+  const body = JSON.stringify({ event, src, price, at: new Date().toISOString(), ...extra });
+  if (TRACK_URL) navigator.sendBeacon(TRACK_URL, new Blob([body], { type: 'application/json' }));
+  else console.log('track', body);
+}
+track('visit');
+document.querySelectorAll('button[data-method]').forEach((b) => b.addEventListener('click', () => {
+  track('try_to_pay', { method: b.dataset.method });
+  document.getElementById('dlg').showModal();
+}));
+document.getElementById('lead').addEventListener('submit', (e) => {
+  const contact = document.getElementById('contact').value.trim();
+  if (e.submitter?.value === 'send' && contact && document.getElementById('ok').checked) track('lead', { contact });
+});
+</script>
+</body>
+</html>

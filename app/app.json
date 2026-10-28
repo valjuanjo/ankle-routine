@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Ankle Routine",
+    "slug": "ankle-routine",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "lab.ankleroutine.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "The camera scans the routine code from your physio or coach.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "lab.ankleroutine.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-sharing",
+      "expo-localization",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "The camera scans the routine code from your physio or coach.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      "expo-notifications"
+    ],
+    "scheme": "ankleroutine"
+  }
+}
